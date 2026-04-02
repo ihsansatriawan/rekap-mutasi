@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { UploadZone } from '@/components/UploadZone';
 import { TransactionPreview } from '@/components/TransactionPreview';
+import { ReportResult } from '@/components/ReportResult';
 import type { Transaction } from '@/lib/parsers/types';
 
 type AppState = 'upload' | 'parsing' | 'preview' | 'result';
@@ -65,7 +66,10 @@ export default function Home() {
         )}
 
         {state === 'result' && (
-          <p className="text-center">Result placeholder</p>
+          <ReportResult
+            transactions={transactions}
+            onBack={() => setState('preview')}
+          />
         )}
       </div>
     </main>
