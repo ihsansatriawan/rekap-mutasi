@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { UploadZone } from '@/components/UploadZone';
+import { TransactionPreview } from '@/components/TransactionPreview';
 import type { Transaction } from '@/lib/parsers/types';
 
 type AppState = 'upload' | 'parsing' | 'preview' | 'result';
@@ -50,7 +51,17 @@ export default function Home() {
         )}
 
         {state === 'preview' && (
-          <p className="text-center">Preview placeholder — {transactions.length} transaksi</p>
+          <TransactionPreview
+            transactions={transactions}
+            onConfirm={(confirmed) => {
+              setTransactions(confirmed);
+              setState('result');
+            }}
+            onBack={() => {
+              setTransactions([]);
+              setState('upload');
+            }}
+          />
         )}
 
         {state === 'result' && (
