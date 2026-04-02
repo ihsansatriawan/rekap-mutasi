@@ -61,6 +61,7 @@ function parseDate(str: string): string | null {
   return null;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function isTimeStr(str: string): boolean {
   return /^\d{2}:\d{2}$/.test(str);
 }
@@ -78,13 +79,6 @@ function isAmountStr(str: string): boolean {
 // x~1380-1460: Amount
 // x~1643-1710: Balance
 
-const COL_DATE = 64;
-const COL_SOURCE = 260;
-const COL_DETAILS = 576;
-const COL_NOTES = 1042;
-const COL_AMOUNT = 1380;
-const COL_BALANCE = 1630;
-
 function getColumn(x: number): 'date' | 'source' | 'details' | 'notes' | 'amount' | 'balance' | 'other' {
   if (x < 200) return 'date';
   if (x < 500) return 'source';
@@ -94,11 +88,6 @@ function getColumn(x: number): 'date' | 'source' | 'details' | 'notes' | 'amount
   return 'balance';
 }
 
-interface TransactionGroup {
-  dateRow: RawRow;
-  timeRow?: RawRow;
-  dataRows: RawRow[];
-}
 
 function parseRows(rows: RawRow[]): Transaction[] {
   const transactions: Transaction[] = [];
@@ -165,8 +154,8 @@ function parseRows(rows: RawRow[]): Transaction[] {
     const date = parseDate(dateStr);
     if (!date) continue;
 
-    // Parse time (first item in date column that looks like HH:MM)
-    const timeStr = colDate.find((t) => isTimeStr(t)) || '';
+    // Parse time (first item in date column that looks like HH:MM) - reserved for future use
+    // const timeStr = colDate.find((t) => isTimeStr(t)) || '';
 
     // Parse amount: find the item that starts with + or -
     const amountRaw = colAmount.find((t) => isAmountStr(t)) || '';
@@ -192,9 +181,6 @@ function parseRows(rows: RawRow[]): Transaction[] {
         description += ` (${sourceAccount})`;
       }
     }
-
-    // Notes
-    const notes = colNotes.join(' ').trim();
 
     transactions.push({
       date,
