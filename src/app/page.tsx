@@ -31,7 +31,9 @@ export default function Home() {
     setError(null);
     try {
       const { parsePdf } = await import('@/lib/parsers/bankJago');
-      const result = await parsePdf(file);
+      const { categorizeAll } = await import('@/lib/categorizer');
+      const parsed = await parsePdf(file);
+      const result = categorizeAll(parsed);
       setTransactions(result);
       setState('preview');
     } catch (err) {
