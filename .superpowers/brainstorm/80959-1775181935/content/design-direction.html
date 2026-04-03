@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RecapMutasi — Design Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F9F7F3;
+    --surface: #FFFFFF;
+    --primary: #15803D;
+    --primary-dark: #14532D;
+    --primary-light: #DCFCE7;
+    --text: #1C1917;
+    --muted: #78716C;
+    --border: #E8E3DB;
+    --income: #15803D;
+    --expense: #DC2626;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ===== HEADER ===== */
+  .site-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--primary-dark);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .logo-icon svg { color: white; }
+
+  .logo-wordmark {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    color: var(--primary-dark);
+    letter-spacing: -0.02em;
+  }
+
+  .header-badge {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--bg);
+    padding: 4px 10px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+  }
+
+  /* ===== MAIN LAYOUT ===== */
+  .main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+  }
+
+  /* ===== STEP PROGRESS ===== */
+  .steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 2.5rem;
+  }
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+  }
+
+  .step-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .step.done .step-dot {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 0 0 3px var(--primary-light);
+  }
+
+  .step.active .step-dot {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 0 0 4px var(--primary-light);
+    transform: scale(1.15);
+  }
+
+  .step.pending .step-dot {
+    background: var(--surface);
+    color: var(--muted);
+    border: 2px solid var(--border);
+  }
+
+  .step-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .step.active .step-label {
+    color: var(--primary);
+    font-weight: 600;
+  }
+
+  .step-line {
+    width: 60px;
+    height: 2px;
+    background: var(--border);
+    margin-bottom: 22px;
+    flex-shrink: 0;
+  }
+
+  .step-line.done {
+    background: var(--primary);
+  }
+
+  /* ===== UPLOAD ZONE ===== */
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--text);
+    margin-bottom: 0.375rem;
+    letter-spacing: -0.02em;
+  }
+
+  .section-subtitle {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .upload-zone {
+    background: var(--surface);
+    border: 2px dashed var(--border);
+    border-radius: 16px;
+    padding: 4rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .upload-zone:hover {
+    border-color: var(--primary);
+    background: var(--primary-light);
+  }
+
+  .upload-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+    box-shadow: var(--shadow);
+  }
+
+  .upload-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 0.375rem;
+  }
+
+  .upload-hint {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .upload-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 1.25rem;
+    padding: 6px 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .tag-dot {
+    width: 6px; height: 6px;
+    background: var(--primary);
+    border-radius: 50%;
+  }
+
+  /* ===== TRANSACTION TABLE ===== */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .card-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg);
+  }
+
+  .card-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .stat-pills {
+    display: flex;
+    gap: 8px;
+  }
+
+  .stat-pill {
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .pill-income {
+    background: #DCFCE7;
+    color: #14532D;
+  }
+
+  .pill-expense {
+    background: #FEE2E2;
+    color: #991B1B;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+
+  th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid #F5F1EC;
+    vertical-align: middle;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #FDFCFA; }
+
+  .date-cell {
+    font-size: 0.8rem;
+    color: var(--muted);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .desc-cell {
+    color: var(--text);
+    max-width: 260px;
+  }
+
+  .amount-cell {
+    text-align: right;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .amount-credit { color: var(--income); }
+  .amount-debit { color: var(--expense); }
+
+  .category-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 9px;
+    border-radius: 100px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    border: 1px solid;
+  }
+
+  .badge-blue { background: #EFF6FF; color: #1D4ED8; border-color: #BFDBFE; }
+  .badge-green { background: #F0FDF4; color: #15803D; border-color: #BBF7D0; }
+  .badge-amber { background: #FFFBEB; color: #92400E; border-color: #FDE68A; }
+  .badge-purple { background: #F5F3FF; color: #6D28D9; border-color: #DDD6FE; }
+  .badge-gray { background: #F9FAFB; color: #374151; border-color: #E5E7EB; }
+
+  /* ===== SUMMARY CARDS ===== */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .summary-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+  }
+
+  .summary-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .summary-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+  }
+
+  .summary-card.income .summary-value { color: var(--income); }
+  .summary-card.expense .summary-value { color: var(--expense); }
+  .summary-card.balance .summary-value { color: var(--primary-dark); }
+
+  .summary-card.income { border-top: 3px solid var(--income); }
+  .summary-card.expense { border-top: 3px solid var(--expense); }
+  .summary-card.balance { border-top: 3px solid var(--primary-dark); }
+
+  /* ===== ACTION BUTTONS ===== */
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--muted);
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: color 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-ghost:hover { color: var(--text); }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.65rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+    background: var(--primary);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.15s;
+    font-family: 'DM Sans', sans-serif;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  }
+
+  .btn-primary:hover { background: var(--primary-dark); }
+
+  .btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.75rem 1.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    background: #25D366;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    box-shadow: 0 2px 8px rgba(37,211,102,0.35);
+  }
+
+  /* ===== CHARTS CONTAINER ===== */
+  .charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .chart-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+  }
+
+  .chart-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .chart-placeholder {
+    height: 180px;
+    background: var(--bg);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+
+  /* ===== TABS (VIEW SECTIONS) ===== */
+  .section-tabs {
+    display: flex;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .section-tab {
+    padding: 0.5rem 0;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--muted);
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    margin-bottom: -2px;
+    transition: all 0.15s;
+  }
+
+  .section-tab.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="logo">
+    <div class="logo-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:white">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/>
+        <polyline points="10 9 9 9 8 9"/>
+      </svg>
+    </div>
+    <span class="logo-wordmark">RecapMutasi</span>
+  </div>
+  <span class="header-badge">Bank Jago · Beta</span>
+</header>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- STEP PROGRESS -->
+  <div class="steps">
+    <div class="step done">
+      <div class="step-dot">✓</div>
+      <span class="step-label">Upload</span>
+    </div>
+    <div class="step-line done"></div>
+    <div class="step done">
+      <div class="step-dot">✓</div>
+      <span class="step-label">Parse</span>
+    </div>
+    <div class="step-line done"></div>
+    <div class="step active">
+      <div class="step-dot">3</div>
+      <span class="step-label">Validasi</span>
+    </div>
+    <div class="step-line"></div>
+    <div class="step pending">
+      <div class="step-dot">4</div>
+      <span class="step-label">Laporan</span>
+    </div>
+  </div>
+
+  <!-- SECTION A: TRANSACTION PREVIEW -->
+  <div style="margin-bottom: 1.25rem;">
+    <h1 class="section-title">Validasi Transaksi</h1>
+    <p class="section-subtitle">Periksa dan sesuaikan kategori sebelum membuat laporan</p>
+  </div>
+
+  <div class="card" style="margin-bottom: 1.5rem;">
+    <div class="card-header">
+      <span class="card-title">25 Transaksi · Maret 2026</span>
+      <div class="stat-pills">
+        <span class="stat-pill pill-income">↑ Rp 4.250.000</span>
+        <span class="stat-pill pill-expense">↓ Rp 2.830.000</span>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Tanggal</th>
+          <th>Deskripsi</th>
+          <th style="text-align:right">Jumlah</th>
+          <th>Kategori</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="date-cell">01 Mar 2026</td>
+          <td class="desc-cell">Transfer dari Ahmad Fauzi</td>
+          <td class="amount-cell amount-credit">+Rp 500.000</td>
+          <td><span class="category-badge badge-green">Infaq/Donasi</span></td>
+        </tr>
+        <tr>
+          <td class="date-cell">03 Mar 2026</td>
+          <td class="desc-cell">Pembayaran Listrik PLN</td>
+          <td class="amount-cell amount-debit">−Rp 285.000</td>
+          <td><span class="category-badge badge-amber">Operasional</span></td>
+        </tr>
+        <tr>
+          <td class="date-cell">05 Mar 2026</td>
+          <td class="desc-cell">Catering Pengajian Bulanan</td>
+          <td class="amount-cell amount-debit">−Rp 750.000</td>
+          <td><span class="category-badge badge-blue">Konsumsi</span></td>
+        </tr>
+        <tr>
+          <td class="date-cell">10 Mar 2026</td>
+          <td class="desc-cell">Donasi warga RT 03</td>
+          <td class="amount-cell amount-credit">+Rp 1.200.000</td>
+          <td><span class="category-badge badge-green">Infaq/Donasi</span></td>
+        </tr>
+        <tr>
+          <td class="date-cell">15 Mar 2026</td>
+          <td class="desc-cell">Perbaikan atap musholla</td>
+          <td class="amount-cell amount-debit">−Rp 1.500.000</td>
+          <td><span class="category-badge badge-purple">Perbaikan</span></td>
+        </tr>
+        <tr>
+          <td class="date-cell">22 Mar 2026</td>
+          <td class="desc-cell">QRIS GoPay deposit</td>
+          <td class="amount-cell amount-credit">+Rp 250.000</td>
+          <td><span class="category-badge badge-gray">Lainnya</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="actions">
+    <button class="btn-ghost">← Upload ulang</button>
+    <button class="btn-primary">Generate Laporan →</button>
+  </div>
+
+  <hr style="border:none; border-top: 1px solid var(--border); margin: 3rem 0 2.5rem;">
+
+  <!-- SECTION B: REPORT RESULT -->
+  <div style="margin-bottom: 1.25rem;">
+    <h1 class="section-title">Laporan Keuangan</h1>
+    <p class="section-subtitle">Maret 2026 · Bank Jago</p>
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-card income">
+      <div class="summary-label">Total Pemasukan</div>
+      <div class="summary-value">Rp 4.250.000</div>
+    </div>
+    <div class="summary-card expense">
+      <div class="summary-label">Total Pengeluaran</div>
+      <div class="summary-value">Rp 2.830.000</div>
+    </div>
+    <div class="summary-card balance">
+      <div class="summary-label">Saldo Akhir</div>
+      <div class="summary-value">Rp 3.920.000</div>
+    </div>
+  </div>
+
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="chart-label">Breakdown Pengeluaran</div>
+      <div class="chart-placeholder">Pie Chart (Recharts)</div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-label">Pemasukan vs Pengeluaran</div>
+      <div class="chart-placeholder">Bar Chart (Recharts)</div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn-ghost">← Kembali ke Preview</button>
+    <button class="btn-whatsapp">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Copy ke WhatsApp
+    </button>
+  </div>
+
+</main>
+
+</body>
+</html>
