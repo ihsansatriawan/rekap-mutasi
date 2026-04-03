@@ -56,11 +56,13 @@ export function UploadZone({ onFileSelected }: UploadZoneProps) {
         </p>
       </div>
 
-      <div
+      <label
+        htmlFor="pdf-upload"
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         style={{
+          display: 'block',
           background: isDragging ? 'rgba(95,201,146,0.04)' : 'var(--surface)',
           border: `1px solid ${isDragging ? 'rgba(95,201,146,0.3)' : 'var(--border-subtle)'}`,
           borderRadius: '12px',
@@ -108,14 +110,12 @@ export function UploadZone({ onFileSelected }: UploadZoneProps) {
           </svg>
         </div>
 
-        <label htmlFor="pdf-upload" style={{ cursor: 'pointer' }}>
-          <p style={{ fontSize: '16px', fontWeight: 500, color: 'var(--text-primary)', marginBottom: '6px', letterSpacing: '0.2px' }}>
-            Drag &amp; drop file PDF di sini
-          </p>
-          <p style={{ fontSize: '14px', fontWeight: 500, color: 'var(--text-secondary)', letterSpacing: '0.2px' }}>
-            atau klik untuk pilih file
-          </p>
-        </label>
+        <p style={{ fontSize: '16px', fontWeight: 500, color: 'var(--text-primary)', marginBottom: '6px', letterSpacing: '0.2px' }}>
+          Drag &amp; drop file PDF di sini
+        </p>
+        <p style={{ fontSize: '14px', fontWeight: 500, color: 'var(--text-secondary)', letterSpacing: '0.2px' }}>
+          atau klik untuk pilih file
+        </p>
 
         <div style={{
           display: 'inline-flex',
@@ -134,7 +134,7 @@ export function UploadZone({ onFileSelected }: UploadZoneProps) {
           <span style={{ color: 'var(--green)', fontSize: '8px' }}>●</span>
           PDF · Maks. 10MB · Privasi terjaga
         </div>
-      </div>
+      </label>
 
       {error && (
         <p style={{ marginTop: '12px', fontSize: '13px', fontWeight: 500, color: 'var(--red)', letterSpacing: '0.2px' }}>
